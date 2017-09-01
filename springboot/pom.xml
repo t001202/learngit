@@ -15,6 +15,7 @@
 		<module>ch801</module>
 		<module>ch802</module>
 		<module>ch803</module>
+		<module>ch901</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -34,7 +35,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
