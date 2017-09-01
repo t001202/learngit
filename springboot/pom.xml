@@ -14,6 +14,7 @@
 	<modules>
 		<module>ch801</module>
 		<module>ch802</module>
+		<module>ch803</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

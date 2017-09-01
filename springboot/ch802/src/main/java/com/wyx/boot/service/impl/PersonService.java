@@ -10,7 +10,12 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by WangYx on 2017/8/31.
@@ -22,6 +27,8 @@ public class PersonService implements DemoService {
 
     @Autowired
     PersonRepository repository;
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     @Override
     @CachePut(value = "people",key = "#person.id")
@@ -41,7 +48,19 @@ public class PersonService implements DemoService {
     @Override
     @Cacheable(value = "people",key = "#person.id")
     public Person findOne(Person person) {
-        Person p3 = repository.getOne(person.getId());
+        String sql = "select id,name,age,address from person where id = ?";
+        Person p3 = jdbcTemplate.query(sql, new Object[]{person.getId()}, new RowMapper<Person>() {
+            @Override
+            public Person mapRow(ResultSet rs, int i) throws SQLException {
+                Person p1 = new Person();
+                p1.setId(rs.getLong("id"));
+                p1.setName(rs.getString("name"));
+                p1.setAge(rs.getInt("age"));
+                p1.setAddress(rs.getString("address"));
+                return p1;
+            }
+        }).get(0);
+        //Person p3 = repository.getOne(person.getId());
         logger.info("为id,key为: " + p3.getId() + " 数据做了缓存");
         return p3;
     }
