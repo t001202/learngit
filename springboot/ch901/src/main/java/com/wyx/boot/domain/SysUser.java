@@ -1,5 +1,6 @@
 package com.wyx.boot.domain;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ public class SysUser implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;
+
     private String username;
     private String password;
 
