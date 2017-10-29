@@ -3,7 +3,7 @@ connection:
   remoteAddress : "192.168.1.1"
 logging:
   level:
-    org.springframework.web: debug
+    org.springframework.web: info
     org.hibernate: error
 
 #spring boot默认会加载classpath:logback-spring.xml或者classpath:logback-spring.groovy
